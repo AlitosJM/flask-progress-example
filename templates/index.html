@@ -5,7 +5,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script>
-
 	var source = new EventSource("/progress");
 	source.onmessage = function(event) {
 		$('.progress-bar').css('width', event.data+'%').attr('aria-valuenow', event.data);
@@ -16,6 +15,19 @@
 		}
 	}
 	</script>
+	<script>
+	    function myFunction() {
+	        var xhttp = new XMLHttpRequest();
+	        xhttp.onreadystatechange = function () {
+						console.log(xhttp.readyState,XMLHttpRequest.DONE)
+	            if (xhttp.readyState === XMLHttpRequest.DONE) {
+	                document.getElementById("demo").innerHTML = xhttp.responseText;
+	            }
+	        };
+	        xhttp.open("POST", "http://127.0.0.1:5000/python",true);
+	        xhttp.send();
+	    }
+	</script>
 </head>
 <body>
 	<div class="progress" style="width: 50%; margin: 50px;">
@@ -23,6 +35,13 @@
 			<span class="progress-bar-label">0%</span>
 		</div>
 	</div>
+	<div class="">
+		<textarea id="mytextarea">Some text...</textarea>
+		<p> Click the button </p>
+		<button type="button" onclick="myFunction()"> Click here</button>
+		<p id="demo"> </p>
+	</div>
+
 </div>
 </body>
 </html>
